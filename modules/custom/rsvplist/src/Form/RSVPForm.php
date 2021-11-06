@@ -49,7 +49,18 @@
         return $form;
     }
 
-    public function submitForm(array &$form, FormStateInterface $form_state){
+    public function validateForm(array &$form, FormStateInterface $form_state){
+        
+        $value = $form_state->getValue('email');
+        
+        if($value == !\Drupal::service('email.validator')->isValid($value)){
+
+            $form_state->setErrorByName('email', t('The Email %mail is invalid.', array('%mail' => $value)));
+        }
+    }
+
+    public function submitForm(array &$form, FormStateInterface $form_state)
+    {
         \Drupal::messenger()->addMessage(t('The Form is Working.'));
     }
   }
