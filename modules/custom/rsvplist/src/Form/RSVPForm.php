@@ -7,13 +7,13 @@
   namespace Drupal\rsvplist\Form;
 
   use Drupal\Core\Database\Database;
-  use Drupal\Core\Form\Formbase;
+  use Drupal\Core\Form\FormBase;
   use Drupal\Core\Form\FormStateInterface;
-
+  use Drupal\node\NodeInterface;
  /**
   * Provides an RSVP Email Form
   */
-  class RSVPForm extends Formbase{
+  class RSVPForm extends FormBase{
     /**
      * (@inheritdoc)
      */
@@ -22,9 +22,13 @@
     //   this is our id for this form, every form in drupal has an id
     }
     
-    public function buildForm(array $form, FormStateInterface $form_state){
-        $node = \Drupal::routeMatch()->getParameter('node');
-        $nid = $node->nid->value;
+    public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $node = NULL){
+        // $node = \Drupal::routeMatch()->getParameter('node');
+        // $nid = $node->nid->value;
+        // if ($node instanceof \Drupal\node\NodeInterface) {
+        //     // You can get nid
+        //   $nid = $node->id();
+        // }
 
         $form['email'] = array(
             '#title' => t('Email Address'),//the t is for translation to other languages
@@ -37,15 +41,15 @@
             '#type' => 'submit',
             '#value' => t('RSVP'),
         );
-        $form['nid'] = array(
-            '#type' => 'hidden',
-            '#value' => $nid,
-        );
+        // $form['nid'] = array(
+        //     '#type' => 'hidden',
+        //     '#value' => $nid,
+        // );
 
         return $form;
     }
 
     public function submitForm(array &$form, FormStateInterface $form_state){
-        drupal_set_message(t('The Form is Working.'));
+        \Drupal::messenger()->addMessage(t('The Form is Working.'));
     }
   }
