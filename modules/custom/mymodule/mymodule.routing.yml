@@ -1,4 +1,4 @@
-mymodule.content
+mymodule.content:
   path: '/mymodule'
   defaults:
     _controller: '\Drupal\mymodule\Controller\FirstController::content'
