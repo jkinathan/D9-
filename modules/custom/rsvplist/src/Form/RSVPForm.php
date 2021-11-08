@@ -61,6 +61,18 @@
 
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
-        \Drupal::messenger()->addMessage(t('The Form is Working.'));
+        // \Drupal::messenger()->addMessage(t('The Form is Working.'));
+        $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id()); 
+        //grabs the current user logged in, study to get differnt variables in drupal
+        \Drupal::database()->insert('rsvplist')
+          ->fields(array(
+            'mail' => $form_state->getValue('email'),//get the value of the email field
+            'nid' => $form_state->getValue('nid'), //get value of node id
+            'uid' => $user->id(),
+            'created' => time(),
+          ))
+          ->execute();
+        \Drupal::messenger()->addMessage(t('Thank you for your RSVP, you are on the list for the event.'));
+
     }
   }
