@@ -6,3 +6,12 @@ rsvplist.form:
   requirements:
     _permission: 'view rsvplist'
     node: \d+
+
+rsvplist.admin_settings:
+  path: '/admin/config/content/rsvplist'
+  defaults:
+    _form: '\Drupal\rsvplist\Form\RSVPSettingsForm'
+    _title: 'RSVP List Settings'
+  requirements:
+    _permission: 'administer rsvplist'
+  
