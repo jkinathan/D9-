@@ -1,11 +1,11 @@
-rsvplist.form:
-  path: '/rsvplist'
-  defaults:
-    _form: '\Drupal\rsvplist\Form\RSVPForm'
-    _title: 'RSVP to this Event'
-  requirements:
-    _permission: 'view rsvplist'
-    node: \d+
+# rsvplist.form:
+#   path: '/rsvplist'
+#   defaults:
+#     _form: '\Drupal\rsvplist\Form\RSVPForm'
+#     _title: 'RSVP to this Event'
+#   requirements:
+#     _permission: 'view rsvplist'
+#     node: \d+
 
 rsvplist.admin_settings:
   path: '/admin/config/content/rsvplist'
@@ -14,4 +14,11 @@ rsvplist.admin_settings:
     _title: 'RSVP List Settings'
   requirements:
     _permission: 'administer rsvplist'
-  
+
+rsvplist.report:
+  path: '/admin/reports/rsvplist'
+  defaults:
+    _controller: '\Drupal\rsvplist\Controller\ReportController::report'
+    _title: 'List of RSVPs'
+  requirements:
+    _permission: 'view rsvplist'
